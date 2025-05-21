@@ -35,14 +35,31 @@ Registra um novo usuário.
   - name: Nome do usuário
   - email: Email do usuário
   - password: Senha do usuário
-- Retorno: Token de acesso
+- Retorno (JSON):
+  ```json
+  {
+    "user": {
+      "id": 1,
+      "name": "João Silva",
+      "email": "joao@exemplo.com",
+      "created_at": "2024-03-21T01:32:38.000000Z",
+      "updated_at": "2024-03-21T01:32:38.000000Z"
+    },
+    "token": "1|laravel_sanctum_token_hash..."
+  }
+  ```
 
 #### POST /api/login  
 Realiza login do usuário.
 - Parâmetros:
   - email: Email do usuário
   - password: Senha do usuário
-- Retorno: Token de acesso
+- Retorno (JSON):
+  ```json
+  {
+    "token": "1|laravel_sanctum_token_hash..."
+  }
+  ```
 
 ### Contas
 
