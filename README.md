@@ -21,9 +21,10 @@ API REST para gerenciamento de contas e transações financeiras.
 
 O sistema possui as seguintes tabelas:
 
-### Contas
-### User
-### TransacaoContas
+- Contas
+- User
+- TransacaoContas
+
 ## APIs Disponíveis
 
 ### Autenticação
@@ -51,7 +52,26 @@ Cria uma nova conta.
 - Parâmetros:
   - numero_conta: Número da conta (inteiro)
   - saldo: Saldo inicial (decimal > 0)
-- Retorno: Dados da conta criada
+- Retorno (JSON):
+  ```json
+  {
+    "numero_conta": 123456,
+    "saldo": 1000.00
+  }
+  ```
+
+#### GET /api/conta
+Consulta uma conta específica.
+- Headers: Bearer Token
+- Query Parameters:
+  - numero_conta: Número da conta
+- Retorno (JSON):
+  ```json
+  {
+    "numero_conta": 123456,
+    "saldo": 1000.00
+  }
+  ```
 
 ### Transações
 
@@ -62,7 +82,13 @@ Realiza uma transação financeira.
   - numero_conta: Número da conta
   - valor: Valor da transação (decimal > 0)
   - forma_pagamento: Forma de pagamento (D: Débito, C: Crédito, P: Pix)
-- Retorno: Número da conta e saldo atualizado
+- Retorno (JSON):
+  ```json
+  {
+    "numero_conta": 123456,
+    "saldo": 1000.00
+  }
+  ```
 - Taxas:
   - Débito: 3%
   - Crédito: 5%
@@ -73,4 +99,26 @@ Lista transações de uma conta.
 - Headers: Bearer Token
 - Query Parameters:
   - numero_conta: Número da conta
-- Retorno: Lista de transações ordenadas por data (decrescente)
+- Retorno (JSON):
+  ```json
+  {
+    "transacoes": [
+      {
+        "id": 1,
+        "numero_conta": 123456,
+        "valor": 100.00,
+        "forma_pagamento": "P",
+        "created_at": "2024-03-20T10:30:00Z"
+      },
+      {
+        "id": 2,
+        "numero_conta": 123456,
+        "valor": 50.00,
+        "forma_pagamento": "D",
+        "created_at": "2024-03-20T09:15:00Z"
+      }
+    ]
+  }
+  ```
+  - Ordenado por data (decrescente)
+  - forma_pagamento: "D" (Débito), "C" (Crédito), "P" (Pix)
